@@ -107,9 +107,6 @@ define(['postmonger'], (Postmonger) => {
         currentStep = step;
         console.log('currentStep', currentStep.key);
        
-       /* $('.step').hide();
-        $(`#${currentStep.key}`).show();
-        */
     }
 
 
@@ -123,6 +120,7 @@ define(['postmonger'], (Postmonger) => {
         schema = data['schema'];
         
         if(schema !== undefined && schema.length > 0){
+
             fillPlaceholderList(schema);
         }else{
             $(alertDE).show();
