@@ -191,7 +191,7 @@ define(['postmonger'], (Postmonger) => {
         }
 
 
-        inArguments.push({ "message": message });
+        inArguments.push({ "message": getMessage() });
         
         payload['arguments'].execute.inArguments = inArguments;
     }
