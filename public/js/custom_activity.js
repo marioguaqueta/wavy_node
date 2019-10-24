@@ -182,6 +182,7 @@ define(['postmonger'], (Postmonger) => {
             return true;
         }else{
             console.log("Message Filled");
+            connection.trigger('updateButton', { button: 'next', enabled: true });
             return false;
         }
     }
@@ -189,6 +190,7 @@ define(['postmonger'], (Postmonger) => {
 
 
     function fillPlaceholderList(schema) {
+        $(camposDE).html('');
         console.log("Filled DE");
         if (schema !== undefined && schema.length > 0) {
             console.log("With Fields");
