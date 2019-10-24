@@ -53,8 +53,8 @@
 	],
 	"userInterfaces": {
 		"configModal": {
-			"width": 500,
-			"height": 200,
+			"width": 700,
+			"height": 600,
 			"fullscreen": true
 		}
 	}

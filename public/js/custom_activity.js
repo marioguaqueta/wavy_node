@@ -119,7 +119,7 @@ define(['postmonger'], (Postmonger) => {
 
 
     function onRequestSchema(data) {
-        console.log('schemaDefinition', schemaDefinition);
+        console.log('schemaDefinition', data);
         schema = data['schema'];
         var schemaPresent = schema !== undefined && schema.length > 0;
         $(dataExtensionWarningSelector).toggle(!schemaPresent);
