@@ -60,10 +60,9 @@ define(['postmonger'], (Postmonger) => {
         connection.trigger('requestSchema');
         connection.trigger('requestTriggerEventDefinition');
 
-        onInputChange
+        onInputChange();
 
-        //$(alertMessage).hide();
-        //$(alertDE).hide();
+        
     }
 
     function onInputChange(){
@@ -166,10 +165,12 @@ define(['postmonger'], (Postmonger) => {
     function validateMessage(){
         var messageArea = $(setupMessage);
         if ($.trim(messageArea.val()) == '') {
+            console.log("Message Null");
             messageArea.focus();
             $(alertMessage).show();
             return true;
         }else{
+            console.log("Message Filled");
             return false;
         }
     }
@@ -177,7 +178,9 @@ define(['postmonger'], (Postmonger) => {
 
 
     function fillPlaceholderList(schema) {
+        console.log("Filled DE");
         if (schema !== undefined && schema.length > 0) {
+            console.log("With Fields");
             for (var i in schema) {
                 var field = schema[i];
                 var fieldName = extractFieldName(field);
