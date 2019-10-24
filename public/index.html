@@ -8,23 +8,76 @@
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/design-system/2.8.3/styles/salesforce-lightning-design-system.min.css">
 
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
 
 
     <link rel="stylesheet" href="css/main.css">
 
     <script data-main="js/main" src="js/require.js"></script>
+
+
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    <style>
+        .glo-placeholder-list {
+            color: gray;
+        }
+    </style>
 </head>
 <body>
-    <
 
-    <div id="message" class="slds-box step">
-        <h1>Setup</h1>
-        <p>Your eventDefinitionKey is <span id="eventDefinitionKey"></span></p>
-        <p>Your Schema has the following fields: <span id="schemaFields"></span></p>
+    <div class="container-fluid" id="message">
+
+        <div class="d-flex justify-content-center pt-3" id="alert-de">
+            <div class="alert alert-danger" role="alert">
+                A simple danger alert—check it out!
+            </div>
+
+        </div>
+
+
+
+        <div class="d-flex justify-content-center pt-3 pb-5" id="setup-message">
+            <div class="card" style="width: 50rem;">
+              <div class="card-body">
+                <h3 class="card-title">Whatsapp Mensagem com Wavy</h3>
+
+                <h5 class="card-title">Campos da sua extensão de datos</h5>
+
+                <ul class="list-group w-50 pt-2 pb-4" id="campos-de">
+                  <li class="list-group-item">Cras justo odio</li>
+                  <li class="list-group-item">Dapibus ac facilisis in</li>
+                  <li class="list-group-item">Morbi leo risus</li>
+                  <li class="list-group-item">Porta ac consectetur ac</li>
+                  <li class="list-group-item">Vestibulum at eros</li>
+              </ul>
+
+              <h5 class="card-title">Configure a sua mensagem</h5>
+              <h6 class="card-subtitle mb-2 text-muted">
+              Configurar a mensagem a ser enviada via API para Wavy</h6>
+              <div class="form-group">
+                <div id="alert-message" class="alert alert-danger" role="alert">
+                    Você deve colocar uma mensagem
+            </div>
+                <textarea class="form-control" id="message-text" rows="3"></textarea>
+            </div>
+
+        </div>
     </div>
 
-    <div id="review" class="slds-box step">
-        <h1>Review</h1>
+</div>
+
+
+</div>
+
+<div id="review" class="slds-box step">
+    <div class="d-flex justify-content-center pt-3">
+        <div class="alert alert-success" role="alert">
+            ¡Terminado!
+        </div>
     </div>
+</div>
 </body>
 </html>
