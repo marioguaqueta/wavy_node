@@ -131,7 +131,8 @@ define(['postmonger'], (Postmonger) => {
         schema = data['schema'];
         
         if(schema !== undefined && schema.length > 0){
-
+            $(alertDE).hide();
+            $(setupMessage).show();
             fillPlaceholderList(schema);
         }else{
             $(alertDE).show();
@@ -170,7 +171,7 @@ define(['postmonger'], (Postmonger) => {
 
 
     function validateMessage(){
-        var messageArea = $(setupMessage);
+        var messageArea = $(messageText);
         if ($.trim(messageArea.val()) == '') {
             console.log("Message Null");
             messageArea.focus();
