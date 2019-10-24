@@ -49,6 +49,14 @@ app.post('/execute',function (req, res){
 });
 
 
+app.post('/',function (req, res){
+    console.log(req.body["name"]);
+    res.status(200);
+    res.sendFile('../public/index.html');
+});
+
+
+
 
 app.listen(PORT, function (){
 	console.log("Esperando requests en el puerto " + PORT);
