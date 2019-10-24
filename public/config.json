@@ -1,0 +1,60 @@
+{
+	"workflowApiVersion": "1.1",
+	"metaData": {
+		"icon": "img/whatsapp.png",
+        "category": "message",
+        "configOnDrop": true
+	},
+	"type": "REST",
+	"lang": {
+		"pt-BR": {
+			"name": "Custom Activity Wavy",
+			"description": "A custom activity for send whatsapp messages via Wavy"
+		}
+	},
+	"arguments": {
+		"execute": {
+			"inArguments": [],
+			"outArguments": [],
+			"url": "https://wavy-node.herokuapp.com/execute",
+			"verb": "POST",
+			"format": "json",
+			"header": "",
+			"body": "",
+			"useJwt": false
+		}
+	},
+	"configurationArguments": {
+		"save": {
+			"url": "https://wavy-node.herokuapp.com/save",
+			"verb": "POST",
+			"format": "json",
+			"body": "",
+			"useJwt": false
+		},
+		"publish": {
+			"url": "https://wavy-node.herokuapp.com/publish",
+			"verb": "POST",
+			"format": "json",
+			"body": "",
+			"useJwt": false
+		},
+		"validate": {
+			"url": "https://wavy-node.herokuapp.com/validate",
+			"verb": "POST",
+			"format": "json",
+			"body": "",
+			"useJwt": false
+		}
+	},
+	"wizardSteps": [
+        { "label": "Message", "key": "message" },
+        { "label": "Review", "key": "review" }
+	],
+	"userInterfaces": {
+		"configModal": {
+			"width": 500,
+			"height": 200
+		}
+	}
+}
