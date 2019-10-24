@@ -60,10 +60,15 @@ define(['postmonger'], (Postmonger) => {
         connection.trigger('requestSchema');
         connection.trigger('requestTriggerEventDefinition');
 
-        $(alertMessage).hide();
-        $(alertDE).hide();
+        onInputChange
+
+        //$(alertMessage).hide();
+        //$(alertDE).hide();
     }
 
+    function onInputChange(){
+        connection.trigger('updateButton', { button: 'next', enabled: validateMessage() });
+    }
 
     
     function initialize(data) {
