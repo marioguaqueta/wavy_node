@@ -137,12 +137,14 @@ define(['postmonger'], (Postmonger) => {
         schema = data['schema'];
         
         if(schema !== undefined && schema.length > 0){
-            $(alertDE).toggle(false);
-            $(setupMessage).toggle(true);
+
+            $(alertDE).css("display", "none");
+            $(setupMessage).css("display", "block");
+            
             fillPlaceholderList(schema);
         }else{
-            $(alertDE).toggle(true);
-            $(setupMessage).toggle(false);
+            $(setupMessage).css("display", "none");
+            $(alertDE).css("display", "block");
             
         }
         
@@ -181,7 +183,7 @@ define(['postmonger'], (Postmonger) => {
         if ($.trim(messageArea.val()) == '') {
             console.log("Message Null");
             messageArea.focus();
-            $(alertMessage).toggle(true);
+            $(alertMessage).css("display", "block");
             connection.trigger('updateButton', { button: 'next', enabled: false });
             return false;
         }else{
