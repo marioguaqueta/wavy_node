@@ -199,6 +199,7 @@ define(['postmonger'], (Postmonger) => {
         $(camposDE).html('');
         console.log("Filled DE");
         if (schema !== undefined && schema.length > 0) {
+            $(alertDE).hide();
             console.log("With Fields");
             for (var i in schema) {
                 var field = schema[i];
@@ -207,6 +208,8 @@ define(['postmonger'], (Postmonger) => {
                     $(camposDE).append('<li class="list-group-item">%%' + fieldName + '%%</li>');
                 }
             }
+        }else{
+            $(alertDE).show();
         }
     }
 
