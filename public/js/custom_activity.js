@@ -212,7 +212,7 @@ define(['postmonger'], (Postmonger) => {
                 connection.trigger('updateButton', {
                     button: 'next',
                     text: 'Next',
-                    enabled: isValidInput() 
+                    enabled: validateMessage() 
                 });
                 connection.trigger('updateButton', {
                     button: 'back',
@@ -228,7 +228,7 @@ define(['postmonger'], (Postmonger) => {
                 connection.trigger('updateButton', {
                     button: 'next',
                     text: 'Next',
-                    enabled: isValidInput() 
+                    enabled: validateMessage() 
                 });
                 connection.trigger('updateButton', {
                     button: 'back',
