@@ -60,6 +60,12 @@ define(['postmonger'], (Postmonger) => {
         connection.trigger('requestSchema');
         connection.trigger('requestTriggerEventDefinition');
 
+        $(messageText).change(function(){
+            console.log("change message");
+            validateMessage();
+});
+
+
         onInputChange();
 
         
