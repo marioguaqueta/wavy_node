@@ -21,7 +21,7 @@ app.post('/save',function (req, res){
 });
 
 app.post('/publish',function (req, res){
-	console.log(req.body["name"]);
+	console.log(req.headers);
     res.status(200);
     res.send({
         route: 'publish'
@@ -31,7 +31,7 @@ app.post('/publish',function (req, res){
 
 
 app.post('/validate',function (req, res){
-	console.log(req.body["name"]);
+	console.log(req.headers);
     res.status(200);
     res.send({
         route: 'validate'
@@ -41,7 +41,7 @@ app.post('/validate',function (req, res){
 
 
 app.post('/execute',function (req, res){
-	console.log(req.body["name"]);
+	console.log(req.body);
     res.status(200);
     res.send({
         route: 'execute'
@@ -50,7 +50,6 @@ app.post('/execute',function (req, res){
 
 
 app.post('/',function (req, res){
-    console.log(req.body["name"]);
     res.status(200);
     res.sendFile('../public/index.html');
 });
