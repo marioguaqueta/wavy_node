@@ -91,12 +91,16 @@ define(['postmonger'], (Postmonger) => {
 
     function onClickedNext() {
         console.log("onClickedNext");
+
         if(currentStep.key === 'review') {
+            console.log('Saving');
             save();
         } else {
             if(validateMessage()){
+                console.log('Valid Message');
                 connection.trigger('nextStep');
             }else{
+                console.log('invalid Message');
                 setTimeout(function(){
                     $(alertMessage).hide();
                 }, 3000);
