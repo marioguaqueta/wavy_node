@@ -168,8 +168,7 @@ define(['postmonger'], (Postmonger) => {
     }
 
     function save() {
-        var message = getMessage();
-        payload['arguments'].execute.inArguments.push({"mensaje": message});
+        
         configureInArguments();
 
 
@@ -191,6 +190,8 @@ define(['postmonger'], (Postmonger) => {
             }
         }
 
+
+        inArguments.push({ "message": message });
         
         payload['arguments'].execute.inArguments = inArguments;
     }
