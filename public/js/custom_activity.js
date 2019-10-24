@@ -170,9 +170,29 @@ define(['postmonger'], (Postmonger) => {
     function save() {
         var message = getMessage();
         payload['arguments'].execute.inArguments.push({"mensaje": message});
+        configureInArguments();
+
 
         console.log(JSON.stringify(payload));
         connection.trigger('updateActivity', payload);
+    }
+
+
+    function configureInArguments() {
+        var inArguments = [];
+        if (schema !== undefined && schema.length > 0) {
+            for (var i in schema) {
+                var field = schema[i];
+                if (isEventDataSourceField(field)) {
+                    var fieldName = extractFieldName(field);
+                    var prefixedFieldName = 'com.globant.event.data.' + fieldName;
+                    saveFieldToInArguments(field, prefixedFieldName, inArguments);
+                }
+            }
+        }
+
+        
+        payload['arguments'].execute.inArguments = inArguments;
     }
 
 
@@ -218,6 +238,12 @@ define(['postmonger'], (Postmonger) => {
 
     function isEventDataSourceField(field) {
         return !field.key.startsWith('Interaction.');
+    }
+
+    function saveFieldToInArguments(field, fieldName, inArguments) {
+        var obj = {};
+        obj[fieldName] = "{{" + field.key + "}}";
+        inArguments.push(obj);
     }
 
 
