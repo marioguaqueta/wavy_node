@@ -163,15 +163,13 @@ define(['postmonger'], (Postmonger) => {
         
     }
 
-
+    function getMessage(){
+        return $(messageText).val();
+    }
 
     function save() {
-        payload.arguments = payload.arguments || {};
-        payload.arguments.execute = payload.arguments.execute || {};
-        payload.metaData = payload.metaData || {};
-        payload.arguments.execute.inArguments = inArguments;
-        
-        payload.metaData.isConfigured = true;
+        var message = getMessage();
+        payload['arguments'].execute.inArguments.push({"mensaje": message});
 
         console.log(JSON.stringify(payload));
         connection.trigger('updateActivity', payload);

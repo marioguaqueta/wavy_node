@@ -13,6 +13,7 @@ app.use(bodyParser.json());
 app.use(express.static(path.join(__dirname, '../public')));
 
 app.post('/save',function (req, res){
+    console.log('ON SAVE');
 	console.log(req.body["name"]);
     res.status(200);
     res.send({
@@ -21,6 +22,7 @@ app.post('/save',function (req, res){
 });
 
 app.post('/publish',function (req, res){
+    console.log('ON PUBLISH');
 	console.log(req.headers);
     res.status(200);
     res.send({
@@ -31,6 +33,7 @@ app.post('/publish',function (req, res){
 
 
 app.post('/validate',function (req, res){
+    console.log('ON VALIDATE');
 	console.log(req.headers);
     res.status(200);
     res.send({
@@ -41,6 +44,7 @@ app.post('/validate',function (req, res){
 
 
 app.post('/execute',function (req, res){
+    console.log('ON EXECUTE');
 	console.log(req.body);
     res.status(200);
     res.send({
