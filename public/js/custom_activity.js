@@ -183,11 +183,11 @@ define(['postmonger'], (Postmonger) => {
             messageArea.focus();
             $(alertMessage).show();
             connection.trigger('updateButton', { button: 'next', enabled: false });
-            return true;
+            return false;
         }else{
             console.log("Message Filled");
             connection.trigger('updateButton', { button: 'next', enabled: true });
-            return false;
+            return true;
         }
     }
 
