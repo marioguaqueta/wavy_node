@@ -63,7 +63,7 @@ define(['postmonger'], (Postmonger) => {
         $(messageText).change(function(){
             console.log("change message");
             validateMessage();
-});
+        });
 
 
         onInputChange();
@@ -72,7 +72,8 @@ define(['postmonger'], (Postmonger) => {
     }
 
     function onInputChange(){
-        connection.trigger('updateButton', { button: 'next', enabled: validateMessage() });
+        var validate = validateMessage();
+        connection.trigger('updateButton', { button: 'next', enabled: validate });
     }
 
     
@@ -81,6 +82,7 @@ define(['postmonger'], (Postmonger) => {
             payload = data;
         }
         showStep(null);
+        validateMessage();
         console.log('initialize', data);
     }
 
