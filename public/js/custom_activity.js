@@ -74,6 +74,7 @@ define(['postmonger'], (Postmonger) => {
         if(data) {
             payload = data;
         }
+        showStep(null);
         console.log('initialize', data);
     }
 
@@ -104,12 +105,12 @@ define(['postmonger'], (Postmonger) => {
 
 
 
-
-
     function onGotoStep(step) {
 
         currentStep = step;
         console.log('currentStep', currentStep.key);
+        showStep(step);
+        
        
     }
 
@@ -168,6 +169,7 @@ define(['postmonger'], (Postmonger) => {
             console.log("Message Null");
             messageArea.focus();
             $(alertMessage).show();
+            connection.trigger('updateButton', { button: 'next', enabled: false });
             return true;
         }else{
             console.log("Message Filled");
@@ -201,6 +203,51 @@ define(['postmonger'], (Postmonger) => {
     }
 
 
+     function showStep(step) {
+        $('.step').hide();
 
+
+        if (step == null) {
+            $('#message').show();
+                connection.trigger('updateButton', {
+                    button: 'next',
+                    text: 'Next',
+                    enabled: isValidInput() 
+                });
+                connection.trigger('updateButton', {
+                    button: 'back',
+                    visible: false
+                });
+        }
+
+        
+
+        switch(currentStep.key) {
+            case 'message':
+                $('#message').show();
+                connection.trigger('updateButton', {
+                    button: 'next',
+                    text: 'Next',
+                    enabled: isValidInput() 
+                });
+                connection.trigger('updateButton', {
+                    button: 'back',
+                    visible: false
+                });
+                break;
+            case 'review':
+                $('#review').show();
+                connection.trigger('updateButton', {
+                    button: 'back',
+                    visible: true
+                });
+                connection.trigger('updateButton', {
+                    button: 'next',
+                    text: 'Done',
+                    visible: true
+                });
+                break;
+        }
+    }
 
 });
