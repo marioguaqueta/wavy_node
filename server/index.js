@@ -50,7 +50,7 @@ app.post('/validate',function (req, res){
 app.post('/execute',function (req, res){
     console.log('------------------------------ON EXECUTE----------------------');
 	//console.log(req.headers);
-    //console.log(req.body);
+    console.log(req.body);
 
     var inArguments = req.body.inArguments;
     var message = '';
