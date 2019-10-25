@@ -74,5 +74,36 @@
         </div>
     </div>
 </div>
+
+
+<p id="GFG_UP" style="font-size: 19px; font-weight: bold;"> 
+    </p> 
+    <button onClick="GFG_Fun()"> 
+        click here 
+    </button> 
+    <p id="GFG_DOWN" style="color: green; font-size: 24px; font-weight: bold;"> 
+    </p> 
+
+
+<script> 
+        var up = document.getElementById('GFG_UP'); 
+        var down = document.getElementById('GFG_DOWN'); 
+        var str = "I have a Lenovo Laptop, a Honor Phone, and a Samsung Tab."; 
+        var Obj = { 
+            Lenovo: "Dell", 
+            Honor: "OnePlus", 
+            Samsung: "Lenovo" 
+        }; 
+        up.innerHTML = str; 
+  
+        function GFG_Fun() { 
+            var RE = new RegExp(Object.keys(Obj).join("|"), "gi"); 
+            down.innerHTML = str.replace(RE, function(matched) { 
+                return Obj[matched]; 
+            }); 
+
+
+        } 
+    </script> 
 </body>
 </html>
