@@ -52,7 +52,7 @@ app.post('/execute',function (req, res){
 	//console.log(req.headers);
     //console.log(req.body);
 
-    var inArguments = req.body['arguments'].execute.inArguments;
+    var inArguments = req.body.inArguments;
     var message = '';
 
     var datetime = new Date();
