@@ -81,6 +81,7 @@ define(['postmonger'], (Postmonger) => {
         if(data) {
             payload = data;
         }
+        getMessageIfExists(data);
         showStep(null);
         validateMessage();
         console.log('initialize', data);
@@ -293,6 +294,10 @@ define(['postmonger'], (Postmonger) => {
                 });
                 break;
         }
+    }
+
+    function getMessageIfExists(data){
+        console.log(data.arguments.execute.inArguments);
     }
 
 });
