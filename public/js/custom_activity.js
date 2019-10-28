@@ -302,7 +302,7 @@ define(['postmonger'], (Postmonger) => {
         if (obj.message != undefined) {
             message = obj.message;
             console.log("OLD MESSAGE " + message);
-            $('#message').val(message);
+            $(messageText).val(message);
         }
     });
 
