@@ -124,7 +124,7 @@ define(['postmonger'], (Postmonger) => {
         console.log('currentStep', currentStep.key);
         showStep(step);
         
-        
+
     }
 
 
@@ -169,7 +169,7 @@ define(['postmonger'], (Postmonger) => {
     }
 
     function save() {
-        
+
         configureInArguments();
 
 
@@ -301,11 +301,12 @@ define(['postmonger'], (Postmonger) => {
 
         if (obj.message != undefined) {
             message = obj.message;
+            console.log("OLD MESSAGE " + message);
             $('#message').val(message);
         }
     });
 
-       
+
    }
 
 });
