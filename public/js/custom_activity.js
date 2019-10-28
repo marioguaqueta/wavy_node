@@ -182,6 +182,7 @@ define(['postmonger'], (Postmonger) => {
         var inArguments = [];
         if (schema !== undefined && schema.length > 0) {
             for (var i in schema) {
+                console.log("INDEX SCHEMA " + i)
                 var field = schema[i];
                 if (isEventDataSourceField(field)) {
                     var fieldName = extractFieldName(field);
