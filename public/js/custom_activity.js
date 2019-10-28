@@ -124,7 +124,7 @@ define(['postmonger'], (Postmonger) => {
         console.log('currentStep', currentStep.key);
         showStep(step);
         
-       
+        
     }
 
 
@@ -233,7 +233,7 @@ define(['postmonger'], (Postmonger) => {
         }
     }
 
-     function extractFieldName(field) {
+    function extractFieldName(field) {
         var index = field.key.lastIndexOf('.');
         return field.key.substring(index + 1);
     }
@@ -249,55 +249,63 @@ define(['postmonger'], (Postmonger) => {
     }
 
 
-     function showStep(step) {
+    function showStep(step) {
         $('.step').hide();
 
 
         if (step == null) {
             $('#message').show();
-                connection.trigger('updateButton', {
-                    button: 'next',
-                    text: 'Next',
-                    enabled: validateMessage() 
-                });
-                connection.trigger('updateButton', {
-                    button: 'back',
-                    visible: false
-                });
+            connection.trigger('updateButton', {
+                button: 'next',
+                text: 'Next',
+                enabled: validateMessage() 
+            });
+            connection.trigger('updateButton', {
+                button: 'back',
+                visible: false
+            });
         }
 
         
 
         switch(currentStep.key) {
             case 'message':
-                $('#message').show();
-                connection.trigger('updateButton', {
-                    button: 'next',
-                    text: 'Next',
-                    enabled: validateMessage() 
-                });
-                connection.trigger('updateButton', {
-                    button: 'back',
-                    visible: false
-                });
-                break;
+            $('#message').show();
+            connection.trigger('updateButton', {
+                button: 'next',
+                text: 'Next',
+                enabled: validateMessage() 
+            });
+            connection.trigger('updateButton', {
+                button: 'back',
+                visible: false
+            });
+            break;
             case 'review':
-                $('#review').show();
-                connection.trigger('updateButton', {
-                    button: 'back',
-                    visible: true
-                });
-                connection.trigger('updateButton', {
-                    button: 'next',
-                    text: 'Done',
-                    visible: true
-                });
-                break;
+            $('#review').show();
+            connection.trigger('updateButton', {
+                button: 'back',
+                visible: true
+            });
+            connection.trigger('updateButton', {
+                button: 'next',
+                text: 'Done',
+                visible: true
+            });
+            break;
         }
     }
 
     function getMessageIfExists(data){
-        console.log(data.arguments.execute.inArguments);
-    }
+       data.arguments.execute.inArguments.forEach(function(obj) { 
+
+        if (obj.message != undefined) {
+            message = obj.message;
+            $('#message').val(message);
+        }
+    });
+
+       
+   }
 
 });
