@@ -22,7 +22,7 @@ define(['postmonger'], (Postmonger) => {
 
     let alertDE = '#alert-de';
     let setupMessage = '#setup-message';
-    let messageText = '#message-text';
+    let messageText = 'textarea#message-text';
     let camposDE = '#campos-de';
     let alertMessage = "#alert-message";
 
