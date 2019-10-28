@@ -20,12 +20,10 @@ define(['postmonger'], (Postmonger) => {
 
     //Input Names
 
-    let alertDE = '#alert-de';
     let setupMessage = '#setup-message';
     let messageText = 'textarea#message-text';
     let camposDEodd = '#campos-de-odd';
     let camposDEeven = '#campos-de-even';
-    let alertMessage = "#alert-message";
 
 
 
@@ -103,9 +101,7 @@ define(['postmonger'], (Postmonger) => {
                 connection.trigger('nextStep');
             }else{
                 console.log('invalid Message');
-                setTimeout(function(){
-                    $(alertMessage).hide();
-                }, 3000);
+               
             }
             
         }
@@ -140,13 +136,12 @@ define(['postmonger'], (Postmonger) => {
         
         if(schema !== undefined && schema.length > 0){
 
-            $(alertDE).css("display", "none");
             $(setupMessage).css("display", "block");
             
             fillPlaceholderList(schema);
         }else{
             $(setupMessage).css("display", "none");
-            $(alertDE).css("display", "block");
+
             
         }
         
@@ -204,7 +199,6 @@ define(['postmonger'], (Postmonger) => {
         if ($.trim(messageArea.val()) == '') {
             console.log("Message Null");
             messageArea.focus();
-            $(alertMessage).css("display", "block");
             connection.trigger('updateButton', { button: 'next', enabled: false });
             return false;
         }else{
@@ -217,10 +211,10 @@ define(['postmonger'], (Postmonger) => {
 
 
     function fillPlaceholderList(schema) {
-        $(camposDE).html('');
+        $(camposDEodd).html('');
+        $(camposDEeven).html('');
         console.log("Filled DE");
         if (schema !== undefined && schema.length > 0) {
-            $(alertDE).hide();
             console.log("With Fields");
             for (var i in schema) {
                 console.log("Index Schema: " + i);
@@ -235,8 +229,6 @@ define(['postmonger'], (Postmonger) => {
                     
                 }
             }
-        }else{
-            $(alertDE).show();
         }
     }
 
