@@ -23,7 +23,8 @@ define(['postmonger'], (Postmonger) => {
     let alertDE = '#alert-de';
     let setupMessage = '#setup-message';
     let messageText = 'textarea#message-text';
-    let camposDE = '#campos-de';
+    let camposDEodd = '#campos-de-odd';
+    let camposDEeven = '#campos-de-even';
     let alertMessage = "#alert-message";
 
 
@@ -226,7 +227,12 @@ define(['postmonger'], (Postmonger) => {
                 var field = schema[i];
                 var fieldName = extractFieldName(field);
                 if (isEventDataSourceField(field)) {
-                    $(camposDE).append('<li class="list-group-item">%%' + fieldName + '%%</li>');
+                    if ((i % 2) == 0){
+                        $(camposDEodd).append('<li class="list-group-item">%%' + fieldName + '%%</li>');
+                    }else{
+                        $(camposDEeven).append('<li class="list-group-item">%%' + fieldName + '%%</li>');
+                    }
+                    
                 }
             }
         }else{
