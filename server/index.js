@@ -52,7 +52,8 @@ app.post('/execute',function (req, res){
 
 
     console.log('------------------------------ON EXECUTE----------------------');
-	console.log(req.headers);
+	console.log(req.get('host'));
+    console.log(req.headers);
     console.log(req.body);
 
 
