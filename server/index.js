@@ -48,9 +48,16 @@ app.post('/validate',function (req, res){
 
 
 app.post('/execute',function (req, res){
+
+
+
     console.log('------------------------------ON EXECUTE----------------------');
-	//console.log(req.headers);
+	console.log(req.headers);
     console.log(req.body);
+
+
+    //APIKey
+
 
     var inArguments = req.body.inArguments;
     var message = '';
@@ -78,6 +85,8 @@ app.post('/execute',function (req, res){
 
     datetime = new Date();
     console.log("FINISH TIME: " + datetime);
+
+    //ToDo Send To wavy
 
 
     res.status(200);
