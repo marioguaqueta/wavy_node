@@ -3,7 +3,7 @@
 	"metaData": {
 		"icon": "img/whatsapp.png",
         "category": "message",
-        "configOnDrop": true
+        "configOnDrop": false
 	},
 	"type": "REST",
 	"lang": {
@@ -21,7 +21,7 @@
 			"format": "json",
 			"header": "",
 			"body": "",
-			"useJwt": true
+			"useJwt": false
 		}
 	},
 	"configurationArguments": {
@@ -30,21 +30,21 @@
 			"verb": "POST",
 			"format": "json",
 			"body": "",
-			"useJwt": true
+			"useJwt": false
 		},
 		"publish": {
 			"url": "https://wavy-node.herokuapp.com/publish",
 			"verb": "POST",
 			"format": "json",
 			"body": "",
-			"useJwt": true
+			"useJwt": false
 		},
 		"validate": {
 			"url": "https://wavy-node.herokuapp.com/validate",
 			"verb": "POST",
 			"format": "json",
 			"body": "",
-			"useJwt": true
+			"useJwt": false
 		}
 	},
 	"wizardSteps": [
