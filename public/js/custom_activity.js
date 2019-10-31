@@ -25,6 +25,7 @@ define(['postmonger'], (Postmonger) => {
     let camposDEodd = '#campos-de-odd';
     let camposDEeven = '#campos-de-even';
     let phoneSelector = '#glo-phone-parameter';
+    var phoneSelectorValue = undefined;
 
 
 
@@ -328,6 +329,11 @@ define(['postmonger'], (Postmonger) => {
             message = obj.message;
             console.log("OLD MESSAGE " + message);
             $(messageText).val(message);
+        }else if (obj.phone != undefined) {
+            phoneSelectorValue = obj.phone;
+            console.log("OLD Phone " + phoneSelectorValue);
+            $(phoneSelector).val(phoneSelectorValue);
+        
         }
     });
 
