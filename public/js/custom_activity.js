@@ -24,6 +24,7 @@ define(['postmonger'], (Postmonger) => {
     let messageText = 'textarea#message-text';
     let camposDEodd = '#campos-de-odd';
     let camposDEeven = '#campos-de-even';
+    let phoneSelector = '#glo-phone-parameter';
 
 
 
@@ -139,6 +140,7 @@ define(['postmonger'], (Postmonger) => {
             $(setupMessage).css("display", "block");
             
             fillPlaceholderList(schema);
+            fillPhoneCombobox(schema);
         }else{
             $(setupMessage).css("display", "none");
 
@@ -163,6 +165,10 @@ define(['postmonger'], (Postmonger) => {
     function getMessage(){
         return $(messageText).val();
     }
+
+    function getPhone() {
+        return $(phoneSelector).val();
+    } 
 
     function save() {
 
@@ -189,6 +195,7 @@ define(['postmonger'], (Postmonger) => {
 
 
         inArguments.push({ "message": getMessage() });
+        inArguments.push({ "phone": getPhone() });
         
         payload['arguments'].execute.inArguments = inArguments;
     }
@@ -227,6 +234,25 @@ define(['postmonger'], (Postmonger) => {
                         $(camposDEeven).append('<li class="list-group-item">%%' + fieldName + '%%</li>');
                     }
                     
+                }
+            }
+        }
+    }
+
+
+    function fillPhoneCombobox(schema) {
+        console.log('Fill Phone');
+        if (schema !== undefined && schema.length > 0) {
+            for (var i in schema) {
+                var field = schema[i];
+                var fieldName = extractFieldName(field);
+                var fieldValue = "{{" + field.key + "}}";
+                var fieldType = field.type;
+                if(fieldType == "Phone"){                    
+                    if (isEventDataSourceField(field)) {
+                        var selected = fieldValue === phoneSelectorValue;
+                        $(phoneSelector).append(new Option(fieldName, fieldValue, false, selected));
+                    }
                 }
             }
         }

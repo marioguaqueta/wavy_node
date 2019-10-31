@@ -1,7 +1,7 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const path = require('path');
-
+const rp = require('request-promise');
 
 const app = express();
 
@@ -62,6 +62,7 @@ app.post('/execute',function (req, res){
 
     var inArguments = req.body.inArguments;
     var message = '';
+    var phone = '';
 
     var datetime = new Date();
     console.log("INIT TIME: " + datetime);
@@ -72,8 +73,12 @@ app.post('/execute',function (req, res){
 
     inArguments.forEach(function(obj) { 
 
+    
+
         if (obj.message != undefined) {
             message = obj.message;
+        }else if(obj.phone != undefined){
+            phone = obj.phone;
         }else{
             regex['%%' + extractFieldName(Object.keys(obj)) + '%%'] =  Object.values(obj);            
         }
@@ -84,16 +89,52 @@ app.post('/execute',function (req, res){
     console.log(decodedMessage);
 
 
-    datetime = new Date();
-    console.log("FINISH TIME: " + datetime);
+    var options = {
+    method: 'POST',
+    uri: 'https://whatsapp-sulamerica-dev.mybluemix.net/api/v1/ativo',
+    headers: {
+        'content-type': 'application/json',
+        'Authorization': 'apikey 71135a72-42e2-4d15-9569-da3e2263a0f3'
+    },
+    body: 
+        {
+    'id_ativo'   : "5dba157f7eef08d6ea1bfc2a",
+    'destino'    : phone,
+    'idCase'     : "5000Z00001F34exQBB",
+    'ttl'        : 1,
+    'context'    :{}, 
+    'parametros' :["SulAmérica", decodedMessage]
+    },
+    json: true
+    };
+
+
+    console.log(options);
+ 
+    
+    rp(options).then(function (response) {
+        console.log("Success " + response);
+    })
+    .catch(function (err) {
+        console.log("Failed " + err);
+    });
+    
 
     //ToDo Send To wavy
+
+
+
+    datetime = new Date();
+    console.log("FINISH TIME: " + datetime);
 
 
     res.status(200);
     res.send({
         route: 'execute'
     });
+
+
+
 });
 
 
