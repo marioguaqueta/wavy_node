@@ -64,7 +64,7 @@ app.post('/execute',function (req, res){
     console.log('------------------------------ON EXECUTE----------------------');
 	//console.log(req.get('host'));
     //console.log(req.headers);
-    console.log("REQ BODY: " + req.body);
+    console.log("REQ BODY: " + JSON.stringify(req.body));
 
     var decoded = jwt.decode(req.body, secret);
     console.log("DECODED REQ BODY: " + decoded);
