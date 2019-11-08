@@ -21,7 +21,7 @@
   "options": {
     "salesforce": {
       "marketingCloud": {
-        "jwtSecret": "0e6ab413017de355d7e4b69ac245963a"
+        "jwtSecret": "xAUfPlS13J"
       }
     }
   }

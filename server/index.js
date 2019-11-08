@@ -72,7 +72,7 @@ app.post('/execute',function (req, res){
     verifyJwt(req.body, Pkg.options.salesforce.marketingCloud.jwtSecret, (err, decoded) => {
         // verification error -> unauthorized request
         if (err) {
-            console.error(err);
+            console.error("ERROR1: " + err);
             return res.status(401).end();
         }
 
