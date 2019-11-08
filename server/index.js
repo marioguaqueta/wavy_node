@@ -2,14 +2,12 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const path = require('path');
 const rp = require('request-promise');
-var jwt = require('jwt-simple');
 
 
 
-var secret = 'kQvK3KXSUAa4Fn7pO3-03b6uD1Ic0DrFsqMWcIHz1wwZQEYhFLcPwmBnYvxZCe-QOOf0BpaxwBQHWulEpUtTCxN9y0fvYOCCJMjEs_IZvprlfi4QohspvhMTY4F5KkaEMA6xLxo40OApZujD9njNEW2GaWHgFCroMteLAGCCIaofXTsAG3SeEpOzcxipOEgY5VA0ALncSzOIcyM9A1Cag-bIAOq95O9Q-f8CTfrnuKdbjfNQxQShU6K0df6_gA2';
-
-
-
+// Helper utility for verifying and decoding the jwt sent from Salesforce Marketing Cloud.
+const verifyJwt = require(path.join(__dirname, 'lib', 'jwt.js'));
+const Pkg = require(path.join(__dirname, '../', 'package.json'));
 
 
 
@@ -18,6 +16,11 @@ const app = express();
 const PORT = process.env.PORT || 3000;
 
 app.use(bodyParser.json());
+
+// Register middleware that parses the request payload.
+app.use(require('body-parser').raw({
+    type: 'application/jwt'
+}));
 
 
 app.use(express.static(path.join(__dirname, '../public')));
@@ -64,10 +67,24 @@ app.post('/execute',function (req, res){
     console.log('------------------------------ON EXECUTE----------------------');
 	//console.log(req.get('host'));
     //console.log(req.headers);
-    console.log("REQ BODY: " + JSON.stringify(req.body));
+    //console.log("REQ BODY: " + JSON.stringify(req.body));
 
-    var decoded = jwt.decode(req.body, secret);
-    console.log("DECODED REQ BODY: " + decoded);
+    verifyJwt(req.body, Pkg.options.salesforce.marketingCloud.jwtSecret, (err, decoded) => {
+        // verification error -> unauthorized request
+        if (err) {
+            console.error(err);
+            return res.status(401).end();
+        }
+
+        if (decoded && decoded.inArguments && decoded.inArguments.length > 0) {
+           //ToDo Logic for send wavy
+        } else {
+            console.error('inArguments invalid.');
+            return res.status(400).end();
+        }
+    });
+
+
 
 
     /*

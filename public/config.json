@@ -21,7 +21,8 @@
 			"format": "json",
 			"header": "",
 			"body": "",
-			"useJwt": true
+			"useJwt": true,
+			"customerKey": "ea1fb4cf-2e96-4ac4-a6ff-af5b4f452a71" 
 		}
 	},
 	"configurationArguments": {
@@ -30,21 +31,24 @@
 			"verb": "POST",
 			"format": "json",
 			"body": "",
-			"useJwt": true
+			"useJwt": true,
+			"customerKey": "ea1fb4cf-2e96-4ac4-a6ff-af5b4f452a71"
 		},
 		"publish": {
 			"url": "https://wavy-node.herokuapp.com/publish",
 			"verb": "POST",
 			"format": "json",
 			"body": "",
-			"useJwt": true
+			"useJwt": true,
+			"customerKey": "ea1fb4cf-2e96-4ac4-a6ff-af5b4f452a71"
 		},
 		"validate": {
 			"url": "https://wavy-node.herokuapp.com/validate",
 			"verb": "POST",
 			"format": "json",
 			"body": "",
-			"useJwt": true
+			"useJwt": true,
+			"customerKey": "ea1fb4cf-2e96-4ac4-a6ff-af5b4f452a71"
 		}
 	},
 	"wizardSteps": [
