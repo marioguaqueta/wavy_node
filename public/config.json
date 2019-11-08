@@ -21,7 +21,7 @@
 			"format": "json",
 			"header": "",
 			"body": "",
-			"useJwt": false
+			"useJwt": true
 		}
 	},
 	"configurationArguments": {
@@ -30,21 +30,21 @@
 			"verb": "POST",
 			"format": "json",
 			"body": "",
-			"useJwt": false
+			"useJwt": true
 		},
 		"publish": {
 			"url": "https://wavy-node.herokuapp.com/publish",
 			"verb": "POST",
 			"format": "json",
 			"body": "",
-			"useJwt": false
+			"useJwt": true
 		},
 		"validate": {
 			"url": "https://wavy-node.herokuapp.com/validate",
 			"verb": "POST",
 			"format": "json",
 			"body": "",
-			"useJwt": false
+			"useJwt": true
 		}
 	},
 	"wizardSteps": [
