@@ -67,7 +67,7 @@ app.post('/execute',function (req, res){
     console.log('------------------------------ON EXECUTE----------------------');
 	//console.log(req.get('host'));
     //console.log(req.headers);
-    //console.log("REQ BODY: " + JSON.stringify(req.body));
+    console.log("REQ BODY: " + JSON.stringify(req.body));
 
     verifyJwt(req.body, Pkg.options.salesforce.marketingCloud.jwtSecret, (err, decoded) => {
         // verification error -> unauthorized request
