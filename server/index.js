@@ -3,7 +3,7 @@ const bodyParser = require('body-parser');
 const path = require('path');
 const rp = require('request-promise');
 var http = require('http');
-
+const JWT = require(path.join(__dirname, 'lib', 'jwt.js'));
 
 
 // Helper utility for verifying and decoding the jwt sent from Salesforce Marketing Cloud.
@@ -73,7 +73,36 @@ app.post('/execute',function (req, res){
     //console.log(req.headers);
     console.log("REQ BODY: " + JSON.stringify(req.body));
 
-   
+
+    JWT(req.body, process.env.jwtSecret, (err, decoded) => {
+
+        console.log("ERR: " + err);
+        console.log("DECODED: " + decoded);
+
+/*
+        // verification error -> unauthorized request
+        if (err) {
+            console.error(err);
+            return res.status(401).end();
+        }
+
+        if (decoded && decoded.inArguments && decoded.inArguments.length > 0) {
+            
+            // decoded in arguments
+            var decodedArgs = decoded.inArguments[0];
+            
+            logData(req);
+            res.send(200, 'Execute');
+        } else {
+            console.error('inArguments invalid.');
+            return res.status(400).end();
+        }
+
+
+*/
+
+    });
+
 
 
 
