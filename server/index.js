@@ -173,7 +173,15 @@ app.post('/execute',function (req, res){
 //app.use(express.static(path.join(__dirname, '../public')));
 
 app.get('/', function (req, res){
-    console.log('Index');
+
+
+    console.log('Body: ' + req);
+    res.status(200);
+    res.sendFile('../public/index.html');
+
+
+
+    /*
     if( !req.session.token ) {
         res.status(200);
     res.sendFile('../public/error.html');
@@ -182,7 +190,7 @@ app.get('/', function (req, res){
         res.sendFile('../public/index.html');
 
     }
-    
+    */
 
 
 });
