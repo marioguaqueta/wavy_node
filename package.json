@@ -21,7 +21,7 @@
   "options": {
     "salesforce": {
       "marketingCloud": {
-        "jwtSecret": "xAUfPlS13J"
+        "jwtSecret": "kQvK3KXSUAa4Fn7pO3-03b6uD1Ic0DrFsqMWcIHz1wwZQEYhFLcPwmBnYvxZCe-QOOf0BpaxwBQHWulEpUtTCxN9y0fvYOCCJMjEs_IZvprlfi4QohspvhMTY4F5KkaEMA6xLxo40OApZujD9njNEW2GaWHgFCroMteLAGCCIaofXTsAG3SeEpOzcxipOEgY5VA0ALncSzOIcyM9A1Cag-bIAOq95O9Q-f8CTfrnuKdbjfNQxQShU6K0df6_gA2"
       }
     }
   }

@@ -74,7 +74,8 @@ app.post('/execute',function (req, res){
     console.log("REQ BODY: " + JSON.stringify(req.body));
 
 
-    JWT(req.body, process.env.jwtSecret, (err, decoded) => {
+    //JWT(req.body, process.env.jwtSecret, (err, decoded) => {
+    JWT(req.body, Pkg.options.salesforce.marketingCloud.jwtSecret, (err, decoded) => {
 
         console.log("ERR: " + err);
         console.log("DECODED: " + JSON.stringify(decoded));
@@ -87,6 +88,10 @@ app.post('/execute',function (req, res){
         if (decoded && decoded.inArguments && decoded.inArguments.length > 0) {
             
             sendWavyMessage(decoded.inArguments);
+            res.status(200);
+            res.send({
+                route: 'execute'
+            });
         } else {
             console.error('inArguments invalid.');
             return res.status(400).end();
@@ -96,15 +101,6 @@ app.post('/execute',function (req, res){
 
     });
 
-
-
-
-    /*
-
-   
-
-
-    */
 
 });
 
@@ -173,15 +169,9 @@ function sendWavyMessage(decoded){
 
 
 
-
     datetime = new Date();
     console.log("FINISH TIME: " + datetime);
 
-
-    res.status(200);
-    res.send({
-        route: 'execute'
-    });
 }
 
 
