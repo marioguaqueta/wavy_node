@@ -79,8 +79,6 @@ app.post('/execute',function (req, res){
         console.log("ERR: " + err);
         console.log("DECODED: " + JSON.stringify(decoded));
 
-/*
-        // verification error -> unauthorized request
         if (err) {
             console.error(err);
             return res.status(401).end();
@@ -88,18 +86,13 @@ app.post('/execute',function (req, res){
 
         if (decoded && decoded.inArguments && decoded.inArguments.length > 0) {
             
-            // decoded in arguments
-            var decodedArgs = decoded.inArguments[0];
-            
-            logData(req);
-            res.send(200, 'Execute');
+            sendWavyMessage(decoded.inArguments);
         } else {
             console.error('inArguments invalid.');
             return res.status(400).end();
         }
 
 
-*/
 
     });
 
@@ -108,7 +101,17 @@ app.post('/execute',function (req, res){
 
     /*
 
-    var inArguments = req.body.inArguments;
+   
+
+
+    */
+
+});
+
+
+
+function sendWavyMessage(decoded){
+    var inArguments = decoded;
     var message = '';
     var phone = '';
 
@@ -159,16 +162,15 @@ app.post('/execute',function (req, res){
 
     console.log(options);
  
-    
+    /*
     rp(options).then(function (response) {
         console.log("Success " + response);
     })
     .catch(function (err) {
         console.log("Failed " + err);
     });
-    
+    */
 
-    //ToDo Send To wavy
 
 
 
@@ -180,13 +182,7 @@ app.post('/execute',function (req, res){
     res.send({
         route: 'execute'
     });
-
-
-    */
-
-});
-
-
+}
 
 
 
