@@ -27,7 +27,7 @@ define(['postmonger'], (Postmonger) => {
     let phoneSelector = '#glo-phone-parameter';
     var phoneSelectorValue = undefined;
 
-
+    var authTokens = {};
 
 
     $(window).ready(onRender);
@@ -50,8 +50,22 @@ define(['postmonger'], (Postmonger) => {
 
     connection.on('gotoStep', onGotoStep);
 
+    
+    connection.on('requestedTokens', onGetTokens);
+
+    
+    connection.on('requestedEndpoints', onGetEndpoints);
 
 
+    function onGetTokens(tokens){
+        console.log(tokens);
+        authTokens = tokens;
+
+    }
+
+    function onGetEndpoints(endpoints){
+        console.log(endpoints);
+    }
 
 
 
@@ -60,6 +74,12 @@ define(['postmonger'], (Postmonger) => {
         connection.trigger('ready');
         connection.trigger('requestSchema');
         connection.trigger('requestTriggerEventDefinition');
+
+
+        connection.trigger('requestTokens');
+        connection.trigger('requestEndpoints');
+
+
 
         $(messageText).change(function(){
             console.log("change message");
@@ -176,7 +196,7 @@ define(['postmonger'], (Postmonger) => {
         configureInArguments();
 
 
-        console.log(JSON.stringify(payload));
+        console.log("ON SAVE: " + JSON.stringify(payload));
         connection.trigger('updateActivity', payload);
     }
 
@@ -197,6 +217,11 @@ define(['postmonger'], (Postmonger) => {
 
         inArguments.push({ "message": getMessage() });
         inArguments.push({ "phone": getPhone() });
+
+        inArguments.push({ "tokens": authTokens });
+
+        payload['metaData'].isConfigured = true;
+        
         
         payload['arguments'].execute.inArguments = inArguments;
     }
@@ -221,11 +246,11 @@ define(['postmonger'], (Postmonger) => {
     function fillPlaceholderList(schema) {
         $(camposDEodd).html('');
         $(camposDEeven).html('');
-        console.log("Filled DE");
+        //console.log("Filled DE");
         if (schema !== undefined && schema.length > 0) {
-            console.log("With Fields");
+            //console.log("With Fields");
             for (var i in schema) {
-                console.log("Index Schema: " + i);
+                //console.log("Index Schema: " + i);
                 var field = schema[i];
                 var fieldName = extractFieldName(field);
                 if (isEventDataSourceField(field)) {

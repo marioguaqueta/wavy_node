@@ -23,7 +23,6 @@ app.use(require('body-parser').raw({
 }));
 
 
-app.use(express.static(path.join(__dirname, '../public')));
 
 app.post('/save',function (req, res){
     console.log('ON SAVE');
@@ -169,12 +168,24 @@ app.post('/execute',function (req, res){
 
 
 
-app.post('/',function (req, res){
-    res.status(200);
-    res.sendFile('../public/index.html');
+
+//Call index.hmtl
+//app.use(express.static(path.join(__dirname, '../public')));
+
+app.get('/', function (req, res){
+    console.log('Index');
+    if( !req.session.token ) {
+        res.status(200);
+    res.sendFile('../public/error.html');
+    }else{
+        res.status(200);
+        res.sendFile('../public/index.html');
+
+    }
+    
+
+
 });
-
-
 
 
 function extractFieldName(field) {
@@ -196,3 +207,5 @@ function GFG_Fun(Obj, str) {
 app.listen(PORT, function (){
 	console.log("Esperando requests en el puerto " + PORT);
 });
+
+
