@@ -77,7 +77,7 @@ app.post('/execute',function (req, res){
     JWT(req.body, process.env.jwtSecret, (err, decoded) => {
 
         console.log("ERR: " + err);
-        console.log("DECODED: " + decoded);
+        console.log("DECODED: " + JSON.stringify(decoded));
 
 /*
         // verification error -> unauthorized request
