@@ -12,17 +12,10 @@
 
 
 
-    <link rel="stylesheet" href="css/main.css">
+    <link rel="icon" type="image/png" href="./img/whatsapp.png" sizes="32x32">
 
     <script data-main="js/main" src="js/require.js"></script>
 
-
- 
-    <style>
-        .glo-placeholder-list {
-            color: gray;
-        }
-    </style>
 </head>
 <body>
 
@@ -33,35 +26,35 @@
         <div class="d-flex justify-content-center pt-3" id="alert-de">
             <div class="alert alert-secondary" role="alert">
               Você deve configurar uma extensão de dados
+          </div>
+
+      </div>
+
+
+
+      <div class="d-flex justify-content-center pt-3 pb-5" id="setup-message">
+        <div class="card" style="width: 50rem;">
+          <div class="card-body">
+            <h3 class="card-title">Whatsapp Mensagem com Wavy</h3>
+
+            <h5 class="card-title">Campos da sua extensão de datos</h5>
+
+            <div class="row">
+                <div class="col">
+                    <ul class="list-group w-50 pt-2 pb-4" id="campos-de-odd" style="font-size: 12px;">
+                    </ul>
+                </div>
+                <div class="col">
+                    <ul class="list-group w-50 pt-2 pb-4" id="campos-de-even" style="font-size: 12px;">
+                    </ul>
+                </div>
             </div>
 
-        </div>
 
-
-
-        <div class="d-flex justify-content-center pt-3 pb-5" id="setup-message">
-            <div class="card" style="width: 50rem;">
-              <div class="card-body">
-                <h3 class="card-title">Whatsapp Mensagem com Wavy</h3>
-
-                <h5 class="card-title">Campos da sua extensão de datos</h5>
-
-                <div class="row">
-                    <div class="col">
-                        <ul class="list-group w-50 pt-2 pb-4" id="campos-de-odd" style="font-size: 12px;">
-                        </ul>
-                    </div>
-                    <div class="col">
-                        <ul class="list-group w-50 pt-2 pb-4" id="campos-de-even" style="font-size: 12px;">
-                        </ul>
-                    </div>
-                </div>
-
-
-              <h5 class="card-title">Configure a sua mensagem</h5>
-              <h6 class="card-subtitle mb-2 text-muted">
-              Configurar a mensagem a ser enviada via API para Wavy</h6>
-              <div class="form-group">
+            <h5 class="card-title">Configure a sua mensagem</h5>
+            <h6 class="card-subtitle mb-2 text-muted">
+            Configurar a mensagem a ser enviada via API para Wavy</h6>
+            <div class="form-group">
                 
                 <textarea class="form-control" id="message-text" rows="10"></textarea>
             </div>

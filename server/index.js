@@ -2,6 +2,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const path = require('path');
 const rp = require('request-promise');
+var http = require('http');
 
 
 
@@ -13,12 +14,16 @@ const Pkg = require(path.join(__dirname, '../', 'package.json'));
 
 const app = express();
 
-const PORT = process.env.PORT || 3000;
 
-app.use(bodyParser.json());
+app.set('port', process.env.PORT || 3000);
+
+
+
+//app.use(bodyParser.json());
+
 
 // Register middleware that parses the request payload.
-app.use(require('body-parser').raw({
+app.use(bodyParser.raw({
     type: 'application/jwt'
 }));
 
@@ -68,21 +73,7 @@ app.post('/execute',function (req, res){
     //console.log(req.headers);
     console.log("REQ BODY: " + JSON.stringify(req.body));
 
-    verifyJwt(req.body, Pkg.options.salesforce.marketingCloud.jwtSecret, (err, decoded) => {
-        // verification error -> unauthorized request
-        if (err) {
-            console.error("ERROR1: " + err);
-            return res.status(401).end();
-        }
-
-        if (decoded && decoded.inArguments && decoded.inArguments.length > 0) {
-           //ToDo Logic for send wavy
-        } else {
-            console.error('inArguments invalid.');
-            return res.status(400).end();
-        }
-    });
-
+   
 
 
 
@@ -169,31 +160,34 @@ app.post('/execute',function (req, res){
 
 
 
+
 //Call index.hmtl
 app.use(express.static(path.join(__dirname, '../public')));
+
 
 app.get('/', function (req, res){
 
 
-    console.log('Body: ' + req);
+    console.log('Body: ' + req.session);
     res.status(200);
-    res.sendFile('../public/index.html');
-
-
-
-    /*
-    if( !req.session.token ) {
-        res.status(200);
-    res.sendFile('../public/error.html');
-    }else{
-        res.status(200);
-        res.sendFile('../public/index.html');
-
-    }
-    */
+    res.header('Cache-Control', 'private, no-cache, no-store, must-revalidate');
+    res.header('Expires', '-1');
+    res.header('Pragma', 'no-cache');
+    res.sendFile(path.join(__dirname, '../public/appjs.html'));
 
 
 });
+
+app.post('/login', function(req,res){
+    console.log( '_Login_');
+    console.log( 'req.body: ', req.body );
+    res.redirect( '/' );
+
+});
+app.post('/logout', function(req,res){
+    console.log('Logout');
+    req.session.token = '';
+} );
 
 
 function extractFieldName(field) {
@@ -212,8 +206,8 @@ function GFG_Fun(Obj, str) {
     return newMessage;
 }
 
-app.listen(PORT, function (){
-	console.log("Esperando requests en el puerto " + PORT);
-});
 
+http.createServer(app).listen(app.get('port'), function(){
+  console.log('Express server listening on port ' + app.get('port'));
+});
 
