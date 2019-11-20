@@ -184,11 +184,8 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.get('/', function (req, res){
 
 
-    console.log('Body: ' + req.body);
+    console.log('Body: ' + JSON.stringify(req.body));
     res.status(200);
-    res.header('Cache-Control', 'private, no-cache, no-store, must-revalidate');
-    res.header('Expires', '-1');
-    res.header('Pragma', 'no-cache');
     res.sendFile(path.join(__dirname, '../public/appjs.html'));
 
 
