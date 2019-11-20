@@ -178,13 +178,13 @@ function sendWavyMessage(decoded){
 
 
 //Call index.hmtl
-app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static(path.join(__dirname, '../public')));
 
 
 app.get('/', function (req, res){
 
 
-    console.log('Body: ' + JSON.stringify(req.body));
+    console.log('Body: ' + req);
     res.status(200);
     res.sendFile(path.join(__dirname, '../public/appjs.html'));
 
