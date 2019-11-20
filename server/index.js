@@ -7,8 +7,6 @@ var http = require('http');
 const JWT = require(path.join(__dirname, 'lib', 'jwt.js'));
 
 
-// Helper utility for verifying and decoding the jwt sent from Salesforce Marketing Cloud.
-const verifyJwt = require(path.join(__dirname, 'lib', 'jwt.js'));
 const Pkg = require(path.join(__dirname, '../', 'package.json'));
 
 
@@ -177,14 +175,12 @@ function sendWavyMessage(decoded){
 
 
 
-//Call index.hmtl
 app.use(express.static(path.join(__dirname, '../public')));
 
 
 app.get('/', function (req, res){
-
-
-    console.log('Body: ' + req);
+    console.log('*************INDEX***************');
+    console.log('Body: ' + JSON.stringify(req));
     res.status(200);
     res.sendFile(path.join(__dirname, '../public/appjs.html'));
 
