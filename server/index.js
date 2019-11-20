@@ -178,18 +178,18 @@ function sendWavyMessage(decoded){
 
 
 //Call index.hmtl
-//app.use(express.static(path.join(__dirname, '../public')));
+app.use(express.static(path.join(__dirname, '../public')));
 
 
 app.get('/', function (req, res){
 
 
-    console.log('Body: ' + req.session);
+    console.log('Body: ' + req.body);
     res.status(200);
     res.header('Cache-Control', 'private, no-cache, no-store, must-revalidate');
     res.header('Expires', '-1');
     res.header('Pragma', 'no-cache');
-    res.sendFile(path.join(__dirname, '../public/indexx.html'));
+    res.sendFile(path.join(__dirname, '../public/appjs.html'));
 
 
 });
