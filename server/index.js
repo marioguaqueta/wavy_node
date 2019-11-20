@@ -4,6 +4,7 @@ const bodyParser = require('body-parser');
 const path = require('path');
 const rp = require('request-promise');
 var http = require('http');
+var router = express.Router();
 const JWT = require(path.join(__dirname, 'lib', 'jwt.js'));
 
 
@@ -16,7 +17,7 @@ const app = express();
 
 app.set('port', process.env.PORT || 3000);
 
-
+app.use(router);
 
 //app.use(bodyParser.json());
 
