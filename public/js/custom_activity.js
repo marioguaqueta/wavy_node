@@ -25,6 +25,7 @@ define(['postmonger'], (Postmonger) => {
     let camposDEodd = '#campos-de-odd';
     let camposDEeven = '#campos-de-even';
     let phoneSelector = '#glo-phone-parameter';
+    let selector = '#select-field';
     var phoneSelectorValue = undefined;
 
     var authTokens = {};
@@ -257,11 +258,16 @@ define(['postmonger'], (Postmonger) => {
                 var field = schema[i];
                 var fieldName = extractFieldName(field);
                 if (isEventDataSourceField(field)) {
-                    if ((i % 2) == 0){
+
+                    
+                    $(selector).append('<option value"'+fieldName+'"">%%' + fieldName + '%%</option>');
+
+
+                    /*if ((i % 2) == 0){
                         $(camposDEodd).append('<li class="list-group-item">%%' + fieldName + '%%</li>');
                     }else{
                         $(camposDEeven).append('<li class="list-group-item">%%' + fieldName + '%%</li>');
-                    }
+                    }*/
                     
                 }
             }
