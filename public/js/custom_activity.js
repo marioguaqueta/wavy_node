@@ -261,17 +261,15 @@ define(['postmonger'], (Postmonger) => {
 
                     
                     $(selector).append('<option value"'+fieldName+'"">%%' + fieldName + '%%</option>');
-
-
-                    /*if ((i % 2) == 0){
-                        $(camposDEodd).append('<li class="list-group-item">%%' + fieldName + '%%</li>');
-                    }else{
-                        $(camposDEeven).append('<li class="list-group-item">%%' + fieldName + '%%</li>');
-                    }*/
                     
                 }
             }
         }
+
+        $(selector).on('change', function() {
+  console.log( this.value );
+  messageArea..append(this.value);
+});
     }
 
 
