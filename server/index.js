@@ -178,7 +178,7 @@ function sendWavyMessage(decoded){
 
 
 //Call index.hmtl
-app.use(express.static(path.join(__dirname, '../public')));
+//app.use(express.static(path.join(__dirname, '../public')));
 
 
 app.get('/', function (req, res){
@@ -200,6 +200,7 @@ app.post('/login', function(req,res){
     res.redirect( '/' );
 
 });
+
 app.post('/logout', function(req,res){
     console.log('Logout');
     req.session.token = '';
