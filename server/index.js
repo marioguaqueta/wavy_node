@@ -180,11 +180,9 @@ app.use(express.static(path.join(__dirname, '../public')));
 
 app.get('/', function (req, res){
     console.log('*************INDEX***************');
-    console.log('Body: ' + JSON.stringify(req));
+    console.log(req.body);
     res.status(200);
     res.sendFile(path.join(__dirname, '../public/appjs.html'));
-
-
 });
 
 app.post('/login', function(req,res){
