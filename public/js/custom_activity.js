@@ -217,8 +217,8 @@ define(['postmonger'], (Postmonger) => {
 
         inArguments.push({ "message": getMessage() });
         inArguments.push({ "phone": getPhone() });
-
         inArguments.push({ "tokens": authTokens });
+
 
         payload['metaData'].isConfigured = true;
         
