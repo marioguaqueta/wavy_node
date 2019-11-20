@@ -260,7 +260,7 @@ define(['postmonger'], (Postmonger) => {
                 if (isEventDataSourceField(field)) {
 
                     
-                    $(selector).append('<option value"%%'+fieldName+'%%"">%%' + fieldName + '%%</option>');
+                    $(selector).append('<option value="%%'+fieldName+'%%">%%' + fieldName + '%%</option>');
                     
                 }
             }
