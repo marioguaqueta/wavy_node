@@ -1,7 +1,7 @@
 {
 	"workflowApiVersion": "1.1",
 	"metaData": {
-		"icon": "../public/img/whatsapp.png",
+		"icon": "img/whatsapp.png",
         "category": "message",
         "configOnDrop": false
 	},
