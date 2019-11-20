@@ -61,6 +61,9 @@ define(['postmonger'], (Postmonger) => {
         console.log(tokens);
         authTokens = tokens;
 
+
+        
+
     }
 
     function onGetEndpoints(endpoints){
