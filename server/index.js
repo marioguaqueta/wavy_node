@@ -123,7 +123,7 @@ function sendWavyMessage(decoded){
 
 
     var decodedMessage = GFG_Fun(regex, message);
-    console.log(decodedMessage);
+    decodedMessage = decodedMessage.replace(/(\r\n|\n|\r)/gm," ");
 
 
     var options = {
