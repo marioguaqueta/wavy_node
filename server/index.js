@@ -7,7 +7,6 @@ var http = require('http');
 var router = express.Router();
 const JWT = require(path.join(__dirname, 'lib', 'jwt.js'));
 
-
 const Pkg = require(path.join(__dirname, '../', 'package.json'));
 
 
@@ -17,10 +16,9 @@ const app = express();
 
 app.set('port', process.env.PORT || 3000);
 
-app.use(router);
 
-//app.use(bodyParser.json());
-
+process.env.token = '';
+process.env.endToken = '';
 
 // Register middleware that parses the request payload.
 app.use(bodyParser.raw({
@@ -69,24 +67,19 @@ app.post('/execute',function (req, res){
 
 
     console.log('------------------------------ON EXECUTE----------------------');
-    //console.log(req.get('host'));
-    //console.log(req.headers);
-    console.log("REQ BODY: " + JSON.stringify(req.body));
 
 
-    //JWT(req.body, process.env.jwtSecret, (err, decoded) => {
     JWT(req.body, Pkg.options.salesforce.marketingCloud.jwtSecret, (err, decoded) => {
 
-        console.log("ERR: " + err);
-        console.log("DECODED: " + JSON.stringify(decoded));
+
 
         if (err) {
-            console.error(err);
+            console.log("ERR: " + err);
             return res.status(401).end();
         }
 
         if (decoded && decoded.inArguments && decoded.inArguments.length > 0) {
-            
+
             sendWavyMessage(decoded.inArguments);
             res.status(200);
             res.send({
@@ -111,16 +104,13 @@ function sendWavyMessage(decoded){
     var message = '';
     var phone = '';
 
-    var datetime = new Date();
-    console.log("INIT TIME: " + datetime);
-
     var regex = {};
 
 
 
     inArguments.forEach(function(obj) { 
 
-    
+
 
         if (obj.message != undefined) {
             message = obj.message;
@@ -137,39 +127,38 @@ function sendWavyMessage(decoded){
 
 
     var options = {
-    method: 'POST',
-    uri: 'https://whatsapp-sulamerica-dev.mybluemix.net/api/v1/ativo',
-    headers: {
-        'content-type': 'application/json',
-        'Authorization': 'apikey 71135a72-42e2-4d15-9569-da3e2263a0f3'
-    },
-    body: 
+        method: 'POST',
+        uri: 'https://whatsapp-sulamerica-dev.mybluemix.net/api/v1/ativo',
+        headers: {
+            'content-type': 'application/json',
+            'Authorization': 'apikey 71135a72-42e2-4d15-9569-da3e2263a0f3'
+        },
+        body: 
         {
-    'id_ativo'   : "5dba157f7eef08d6ea1bfc2a",
-    'destino'    : phone,
-    'idCase'     : "5000Z00001F34exQBB",
-    'ttl'        : 1,
-    'context'    :{}, 
-    'parametros' :["SulAmérica", decodedMessage]
-    },
-    json: true
+            'id_ativo'   : "5dba157f7eef08d6ea1bfc2a",
+            'destino'    : phone,
+            'idCase'     : "5000Z00001F34exQBB",
+            'ttl'        : 1,
+            'context'    :{}, 
+            'parametros' :["SulAmérica", decodedMessage]
+        },
+        json: true
     };
 
 
-    console.log(options);
- 
+
     
     rp(options).then(function (response) {
-        console.log("Success " + response);
+        saveWhatappSendLog(phone, "success " + response, decodedMessage);
+        console.log("Success Wavy");
     })
     .catch(function (err) {
-        console.log("Failed " + err);
+        saveWhatappSendLog(phone, "fail err:" + err, decodedMessage);
+        console.log("Failed Wavy");
     });
     
 
 
-    datetime = new Date();
-    console.log("FINISH TIME: " + datetime);
 
 }
 
@@ -178,17 +167,13 @@ function sendWavyMessage(decoded){
 app.use(express.static(path.join(__dirname, '../public')));
 
 
-app.get('/', function (req, res){
-    console.log('*************INDEX***************');
-    console.log(req.body);
-    res.status(200);
-    res.sendFile(path.join(__dirname, '../public/appjs.html'));
-});
 
 app.post('/login', function(req,res){
     console.log( '_Login_');
-    console.log( 'req.body: ', req.body );
-    res.redirect( '/' );
+    res.status(200);
+    res.send({
+        route: 'execute'
+    });
 
 });
 
@@ -212,6 +197,73 @@ function GFG_Fun(Obj, str) {
     });
 
     return newMessage;
+}
+
+
+
+function saveWhatappSendLog(phone, status, message){
+
+
+   var optionsToken = {
+    method: 'POST',
+    uri: Pkg.options.salesforce.marketingCloud.authEndpoint + 'v2/token',
+    headers: {
+        'content-type': 'application/json'
+    },
+    body: 
+    {
+        'grant_type'   : "client_credentials",
+        'client_id'    : Pkg.options.salesforce.marketingCloud.clientId,
+        'client_secret'     : Pkg.options.salesforce.marketingCloud.clientSecret
+    },
+    json: true
+};
+
+
+
+
+rp(optionsToken).then(function (response) {
+    process.env.token = response.access_token;
+    var optionsInsertDE = {
+        method: 'POST',
+        uri: Pkg.options.salesforce.marketingCloud.restEndpoint + 'hub/v1/dataevents/key:A8D8249F-2861-4E6B-A583-830070376E77/rowset',
+        headers: {
+            'content-type': 'application/json',
+            'Authorization' : 'Bearer ' + response.access_token
+        },
+        body: 
+        [
+        {
+            "keys":{
+                "Phone": phone,
+                "DateCreated": new Date()
+            },
+            "values":{
+                "Mensagens": message,
+                "Status": status
+            }
+        }
+        ],
+        json: true
+    };
+
+
+    rp(optionsInsertDE).then(function (responseInsert) {
+        console.log("Sucess insert");
+
+    })
+    .catch(function (errInsert) {
+        console.log("Fail Insert");
+    });
+
+
+})
+.catch(function (err) {
+    console.log("Error token");
+});
+
+
+
 }
 
 
