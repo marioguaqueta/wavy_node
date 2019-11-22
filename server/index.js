@@ -158,14 +158,14 @@ function sendWavyMessage(decoded){
 
     console.log(options);
  
-    /*
+    
     rp(options).then(function (response) {
         console.log("Success " + response);
     })
     .catch(function (err) {
         console.log("Failed " + err);
     });
-    */
+    
 
 
     datetime = new Date();
