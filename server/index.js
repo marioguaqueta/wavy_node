@@ -72,7 +72,8 @@ app.post('/execute',function (req, res){
     JWT(req.body, Pkg.options.salesforce.marketingCloud.jwtSecret, (err, decoded) => {
 
 
-
+        console.log(req.body);
+        console.log(decoded);
         if (err) {
             console.log("ERR: " + err);
             return res.status(401).end();
