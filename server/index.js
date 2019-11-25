@@ -146,7 +146,7 @@ function sendWavyMessage(decoded){
     };
 
 
-
+    /*
     
     rp(options).then(function (response) {
         saveWhatappSendLog(phone, "success " + response, decodedMessage);
@@ -157,7 +157,7 @@ function sendWavyMessage(decoded){
         console.log("Failed Wavy");
     });
     
-
+*/
 
 
 }
