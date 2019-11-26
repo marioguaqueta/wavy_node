@@ -15,6 +15,8 @@ const Pkg = require(path.join(__dirname, '../', 'package.json'));
 const app = express();
 
 
+
+
 app.set('port', process.env.PORT || 3000);
 
 
@@ -66,13 +68,12 @@ app.post('/execute',function (req, res){
 
 
     console.log('------------------------------ON EXECUTE----------------------');
-
+    var IdCase = uuid.v1();
 
     JWT(req.body, Pkg.options.salesforce.marketingCloud.jwtSecret, (err, decoded) => {
 
 
-        console.log(req.body);
-        console.log(decoded);
+        
         if (err) {
             console.log("ERR: " + err);
             return res.status(401).end();
@@ -80,7 +81,7 @@ app.post('/execute',function (req, res){
 
         if (decoded && decoded.inArguments && decoded.inArguments.length > 0) {
 
-            sendWavyMessage(decoded.inArguments);
+            sendWavyMessage(decoded.inArguments, IdCase);
             res.status(200);
             res.send({
                 route: 'execute'
@@ -99,7 +100,7 @@ app.post('/execute',function (req, res){
 
 
 
-function sendWavyMessage(decoded){
+function sendWavyMessage(decoded, IdCase){
     var inArguments = decoded;
     var message = '';
     var phone = '';
@@ -137,7 +138,7 @@ function sendWavyMessage(decoded){
         {
             'id_ativo'   : "5dba157f7eef08d6ea1bfc2a",
             'destino'    : phone,
-            'idCase'     : "5000Z00001F34exQBB",
+            'idCase'     : IdCase,
             'ttl'        : 1,
             'context'    :{}, 
             'parametros' :["SulAmérica", decodedMessage]
@@ -150,11 +151,11 @@ function sendWavyMessage(decoded){
     
     rp(options).then(function (response) {
 
-        saveWhatappSendLog(phone, "success", decodedMessage);
+        saveWhatappSendLog(phone, "success", decodedMessage, IdCase);
         console.log("Success Wavy");
     })
     .catch(function (err) {
-        saveWhatappSendLog(phone, "fail", decodedMessage);
+        saveWhatappSendLog(phone, "fail", decodedMessage, IdCase);
         console.log("Failed Wavy");
     });
     
@@ -185,7 +186,7 @@ function GFG_Fun(Obj, str) {
 
 
 
-function saveWhatappSendLog(phone, status, message){
+function saveWhatappSendLog(phone, status, message, IdCase){
 
 
    var optionsToken = {
@@ -219,7 +220,7 @@ rp(optionsToken).then(function (response) {
         [
         {
             "keys":{
-                "IdCase" : uuid.v1()
+                "IdCase" : IdCase
                 
             },
             "values":{
