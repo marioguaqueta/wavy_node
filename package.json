@@ -17,16 +17,17 @@
     "path": "^0.12.7",
     "request": "^2.88.0",
     "request-promise": "^4.2.4",
-    "sfmc-fuelsdk-node": "^2.4.0"
+    "sfmc-fuelsdk-node": "^2.4.0",
+    "uuid": "^3.3.3"
   },
   "options": {
     "salesforce": {
       "marketingCloud": {
         "jwtSecret": "kQvK3KXSUAa4Fn7pO3-03b6uD1Ic0DrFsqMWcIHz1wwZQEYhFLcPwmBnYvxZCe-QOOf0BpaxwBQHWulEpUtTCxN9y0fvYOCCJMjEs_IZvprlfi4QohspvhMTY4F5KkaEMA6xLxo40OApZujD9njNEW2GaWHgFCroMteLAGCCIaofXTsAG3SeEpOzcxipOEgY5VA0ALncSzOIcyM9A1Cag-bIAOq95O9Q-f8CTfrnuKdbjfNQxQShU6K0df6_gA2",
-        "authEndpoint" : "https://mc5g3q47-b74p6n62j9sx3j3n0g8.auth.marketingcloudapis.com/",
-        "restEndpoint" : "https://mc5g3q47-b74p6n62j9sx3j3n0g8.rest.marketingcloudapis.com/",
-        "clientId" : "dqxd3lq263hnfl09sdz8gz6o",
-        "clientSecret" : "mR4pVLEyRKk9tPofAfQi9xzq"
+        "authEndpoint": "https://mc5g3q47-b74p6n62j9sx3j3n0g8.auth.marketingcloudapis.com/",
+        "restEndpoint": "https://mc5g3q47-b74p6n62j9sx3j3n0g8.rest.marketingcloudapis.com/",
+        "clientId": "dqxd3lq263hnfl09sdz8gz6o",
+        "clientSecret": "mR4pVLEyRKk9tPofAfQi9xzq"
       }
     }
   }

@@ -4,6 +4,7 @@ const bodyParser = require('body-parser');
 const path = require('path');
 const rp = require('request-promise');
 var http = require('http');
+var uuid = require('uuid');
 var router = express.Router();
 const JWT = require(path.join(__dirname, 'lib', 'jwt.js'));
 
@@ -26,6 +27,7 @@ app.use(bodyParser.raw({
 }));
 
 
+app.use(express.static(path.join(__dirname, '../public')));
 
 app.post('/save',function (req, res){
     console.log('ON SAVE');
@@ -147,41 +149,25 @@ function sendWavyMessage(decoded){
     };
 
 
-    /*
+
     
     rp(options).then(function (response) {
-        saveWhatappSendLog(phone, "success " + response, decodedMessage);
+
+        saveWhatappSendLog(phone, "success", decodedMessage);
         console.log("Success Wavy");
     })
     .catch(function (err) {
-        saveWhatappSendLog(phone, "fail err:" + err, decodedMessage);
+        saveWhatappSendLog(phone, "fail", decodedMessage);
         console.log("Failed Wavy");
     });
     
-*/
+
 
 
 }
 
 
 
-app.use(express.static(path.join(__dirname, '../public')));
-
-
-
-app.post('/login', function(req,res){
-    console.log( '_Login_');
-    res.status(200);
-    res.send({
-        route: 'execute'
-    });
-
-});
-
-app.post('/logout', function(req,res){
-    console.log('Logout');
-    req.session.token = '';
-} );
 
 
 function extractFieldName(field) {
@@ -227,7 +213,7 @@ rp(optionsToken).then(function (response) {
     process.env.token = response.access_token;
     var optionsInsertDE = {
         method: 'POST',
-        uri: Pkg.options.salesforce.marketingCloud.restEndpoint + 'hub/v1/dataevents/key:A8D8249F-2861-4E6B-A583-830070376E77/rowset',
+        uri: Pkg.options.salesforce.marketingCloud.restEndpoint + 'hub/v1/dataevents/key:4CEA9EC6-1EB8-4C73-8EC2-B2F7FF025F73/rowset',
         headers: {
             'content-type': 'application/json',
             'Authorization' : 'Bearer ' + response.access_token
@@ -236,12 +222,14 @@ rp(optionsToken).then(function (response) {
         [
         {
             "keys":{
-                "Phone": phone,
-                "DateCreated": new Date()
+                "IdCase" : uuid.v1()
+                
             },
             "values":{
                 "Mensagens": message,
-                "Status": status
+                "Status": status,
+                "Phone": phone,
+                "DateCreated": new Date()
             }
         }
         ],
