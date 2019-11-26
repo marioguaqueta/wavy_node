@@ -268,7 +268,7 @@ define(['postmonger'], (Postmonger) => {
 
         $(selector).on('change', function() {
   console.log( this.value );
-  $(messageText).append(this.value);
+  $(messageText).val($(messageText).val() + this.value );
 });
     }
 
