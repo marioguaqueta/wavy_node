@@ -18,9 +18,6 @@ const app = express();
 app.set('port', process.env.PORT || 3000);
 
 
-process.env.token = '';
-process.env.endToken = '';
-
 // Register middleware that parses the request payload.
 app.use(bodyParser.raw({
     type: 'application/jwt'
