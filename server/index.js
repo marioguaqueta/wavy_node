@@ -129,14 +129,14 @@ function sendWavyMessage(decoded, IdCase){
 
     var options = {
         method: 'POST',
-        uri: 'https://whatsapp-sulamerica-dev.mybluemix.net/api/v1/ativo',
+        uri: 'https://whatsapp-sulamerica.mybluemix.net/api/v1/ativo',
         headers: {
             'content-type': 'application/json',
-            'Authorization': 'apikey 71135a72-42e2-4d15-9569-da3e2263a0f3'
+            'Authorization': 'apikey d4228c09-e3fd-40dc-ac27-5663c79e415b'
         },
         body: 
         {
-            'id_ativo'   : "5dba157f7eef08d6ea1bfc2a",
+            'id_ativo'   : "5dcbf68bb84d1d79af133f37",
             'destino'    : phone,
             'idCase'     : IdCase,
             'ttl'        : 1,
