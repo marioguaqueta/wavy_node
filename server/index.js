@@ -68,7 +68,7 @@ app.post('/execute',function (req, res){
 
 
     console.log('------------------------------ON EXECUTE----------------------');
-    var IdCase = uuid.v1();
+    var IdCase = randomString(48, '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ');
 
     JWT(req.body, Pkg.options.salesforce.marketingCloud.jwtSecret, (err, decoded) => {
 
@@ -251,6 +251,13 @@ rp(optionsToken).then(function (response) {
 
 
 
+}
+
+
+function randomString(length, chars) {
+    var result = '';
+    for (var i = length; i > 0; --i) result += chars[Math.round(Math.random() * (chars.length - 1))];
+    return result;
 }
 
 
