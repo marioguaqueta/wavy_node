@@ -68,8 +68,10 @@ app.post('/execute',function (req, res){
 
 
     console.log('------------------------------ON EXECUTE----------------------');
-    var IdCase = randomString(48, '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ');
 
+    var IdCase = randomString(48, '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ');
+    let ts = Date.now();
+    console.log("Id Case: " + IdCase + " init time: " + ts);
     JWT(req.body, Pkg.options.salesforce.marketingCloud.jwtSecret, (err, decoded) => {
 
 
@@ -187,7 +189,7 @@ function GFG_Fun(Obj, str) {
 
 
 function saveWhatappSendLog(phone, status, message, IdCase){
-
+    
 
    var optionsToken = {
     method: 'POST',
@@ -236,6 +238,8 @@ rp(optionsToken).then(function (response) {
 
 
     rp(optionsInsertDE).then(function (responseInsert) {
+        let ts = Date.now();
+        console.log("Id Case: " + IdCase + " Finish time: " + ts);
         console.log("Sucess insert");
 
     })
